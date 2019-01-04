@@ -1,0 +1,104 @@
+import ply.lex as lex
+import re
+
+
+tokens = ('SINO',
+          'SI',
+          'ENT',
+          'VACUO',
+          'RET',
+          'MIENTAS',
+          'REP',
+          'ARITMETICO',
+          'RELACIONALES',
+          'LOGICOS',
+          'IGUAL',
+          'PARENTESIS',
+          'COMENTARIOS',
+          'PUNTUACION',
+          'ID',
+          'NUM'
+          )
+
+def t_SINO(t):
+    r'(?i)sino'
+    return t
+
+def t_SI(t):
+    r'(?i)si'
+    return t
+
+def t_ENT(t):
+    r'(?i)ent'
+    return t
+
+def t_VACUO(t):
+    r'(?i)vacuo'
+    return t
+
+def t_RET(t):
+    r'(?i)ret'
+    return t
+
+def t_MIENTAS(t):
+    r'(?i)mientras'
+    return t
+
+def t_REP(t):
+    r'(?i)rep'
+    return t
+
+def t_ARITMETICO(t):
+    r'(\+){1,2}|(\-){1,2}'
+    return t
+
+def t_RELACIONALES(t):
+    r'LT|EQ'
+    return t
+
+def t_LOGICOS(t):
+    r'&&|!'
+    return t
+
+def t_IGUAL(t):
+    r'='
+    return t
+
+def t_PARENTESIS(t):
+    r'\[|\]|<|>|\(|\)'
+    return t
+
+def t_COMENTARIOS(t):
+    r'((\#).*)|((/\*).*(\*/))'
+    return t
+
+def t_PUNTUACION(t):
+    r',|;'
+    return t
+
+def t_ID(t):
+    r'[a-z]([A-Za-z]*($[A-Za-z]+)*)?($)?{0-9]*'
+    return t
+
+def t_NUM(t):
+    r'([0-9]+\#8)|([0-9]+)|([0-9a-f]+\#16)'
+    return t
+
+
+
+t_ignore = ' \t\n'  # Ignorar esto!
+
+
+def t_error(t):
+    print("Illegal character '{0}' at line {1}".format(t.value[0], t.lineno))
+    # Tratamiento de errores.
+    t.lexer.skip(1)
+
+
+lexer = lex.lex()
+
+with open('sample.txt', 'r') as f:
+    contents = f.read()
+    lex.input(contents)
+    for tok in iter(lex.token, None):
+        print (repr(tok.type), repr(tok.value))
