@@ -1,5 +1,11 @@
 from tabla_simbolos import *
 
+esGlobal = True
+general = NodoGeneral()
+funcion = None
+cant = 0
+
+
 class BuildTablaSimbolosVisitor(object):
     def __init__(self):
         self.ast = ''
@@ -19,19 +25,60 @@ class BuildTablaSimbolosVisitor(object):
 
     def visit_declaracion_var(self, declaracion_var):
 
-        funcion_global = NodoFuncionGlobales()
+        #Variables Globales
+        if(esGlobal):
 
-        if declaracion_var.NUM_t is not None:
-            variable_global = nodoVariableGlobal(declaracion_var.def_tipo_p, declaracion_var.ID_t, True)
-            NodoFuncionGlobales.agregarGlobal(funcion_global, variable_global)
+            if declaracion_var.NUM_t is not None:
+                variable_global = nodoVariableGlobal(declaracion_var.def_tipo_p, declaracion_var.ID_t, True)
+
+                for i in range(len(general.listGlobales)):
+                    if (variable_global.ID == general.listGlobales[i].ID):
+                        print('VARIABLE GLOBAL DUPLICADA')
+
+                NodoGeneral.agregarGlobal(general, variable_global)
+            else:
+                variable_global = nodoVariableGlobal(declaracion_var.def_tipo_p, declaracion_var.ID_t, False)
+
+                for i in range(len(general.listGlobales)):
+                    if (variable_global.ID == general.listGlobales[i].ID):
+                        print('VARIABLE GLOBAL DUPLICADA')
+
+                NodoGeneral.agregarGlobal(general, variable_global)
+
+
+
+        #Variables Locales
         else:
-            variable_global = nodoVariableGlobal(declaracion_var.def_tipo_p, declaracion_var.ID_t, False)
-            NodoFuncionGlobales.agregarGlobal(funcion_global, variable_global)
+            global funcion
 
-        funcion_global.iterar()
+            if declaracion_var.NUM_t is not None:
+                variable_local = nodoVariableLocal(declaracion_var.def_tipo_p, declaracion_var.ID_t, True)
+
+                for i in range(len(funcion.listLocales)):
+                    if (variable_local.ID == funcion.listLocales[i].ID):
+                        print('VARIABLE LOCAL DUPLICADA' + str(variable_local.ID))
+
+                nodoFuncion.agregarLocales(funcion, variable_local)
+
+            else:
+                variable_local = nodoVariableLocal(declaracion_var.def_tipo_p, declaracion_var.ID_t, False)
+
+                for i in range(len(funcion.listLocales)):
+                    if (variable_local.ID == funcion.listLocales[i].ID):
+                        print('VARIABLE LOCAL DUPLICADA' + str(variable_local.ID))
+
+                nodoFuncion.agregarLocales(funcion, variable_local)
+
 
 
     def visit_declaracion_fun(self, declaracion_fun):
+
+        global funcion
+        funcion = nodoFuncion(declaracion_fun.def_tipo_p, declaracion_fun.ID_t)
+
+        NodoGeneral.agregarFuncion(general, funcion)
+
+        global posicion
 
         if declaracion_fun.parametros_p is not None:
             if isinstance(declaracion_fun.parametros_p, list):
@@ -42,16 +89,40 @@ class BuildTablaSimbolosVisitor(object):
                 if isinstance(stmt, str):
                     pass
                 elif stmt is not None:
-                    pass
-                    #stmt.accept2(self)
-        #declaracion_fun.sentencia_comp_p.accept2(self)
+                    stmt.accept2(self)
+        declaracion_fun.sentencia_comp_p.accept2(self)
+
+        general.iterar()
 
     def visit_param(self, param):
 
+        global funcion
+
         if param.LESSTHAN_t is not None:
-            pass
+            variable_param = nodoVariableParam(param.def_tipo_p, param.ID_t, True)
+
+            for i in range(len(funcion.listParam)):
+                if (variable_param.ID == funcion.listParam[i].ID):
+                    print('VARIABLE PARAMETRO DUPLICADA ' + str(variable_param.ID))
+
+            nodoFuncion.agregarParam(funcion, variable_param)
+
+        else:
+            variable_param = nodoVariableParam(param.def_tipo_p, param.ID_t, False)
+
+            for i in range(len(funcion.listParam)):
+                if (variable_param.ID == funcion.listParam[i].ID):
+                    print('VARIABLE PARAMETRO DUPLICADA ' + str(variable_param.ID))
+
+            nodoFuncion.agregarParam(funcion, variable_param)
+
+
+
 
     def visit_sentencia_comp(self, sentencia_comp):
+
+        global esGlobal
+        esGlobal = False
 
         if sentencia_comp.declaraciones_locales_p is not None:
             if isinstance(sentencia_comp.declaraciones_locales_p, list):
@@ -65,6 +136,9 @@ class BuildTablaSimbolosVisitor(object):
                     stmt.accept2(self)
 
     def visit_declaraciones_locales(self, declaraciones_locales):
+        global esGlobal
+        esGlobal = False
+
 
         if declaraciones_locales.declaraciones_locales_p is not None:
             if not isinstance(declaraciones_locales.declaraciones_locales_p, list):
@@ -113,6 +187,7 @@ class BuildTablaSimbolosVisitor(object):
                         stmt.accept2(self)
 
     def visit_expresion(self, expresion):
+
 
         pass
 
@@ -242,6 +317,9 @@ class BuildTablaSimbolosVisitor(object):
     def visit_expresion_aditiva(self, expresion_aditiva):
 
         if expresion_aditiva.addop_p == '+':
+            #VERIFICAR TIPO
+            print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHH " +expresion_aditiva.term_p)
+            #while general.listGlobales[i].ID != expresion_aditiva.term_p:
             pass
         else:
             pass
@@ -262,6 +340,7 @@ class BuildTablaSimbolosVisitor(object):
 
         if term.mulop_p == '++':
             pass
+
 
         else:
             pass

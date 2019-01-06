@@ -1,3 +1,4 @@
+
 class Visitor(object):
     def __init__(self):
         self.ast = ''
@@ -6,6 +7,7 @@ class Visitor(object):
         self.id_declaracion_var = 0
         self.id_declaracion_fun = 0
         self.id_param = 0
+        self.id_lista_sentencias = 0
         self.id_sentencia_comp = 0
         self.id_declaraciones_locales = 0
         self.id_sentencia_seleccion = 0
@@ -120,13 +122,38 @@ class Visitor(object):
             self.ast += '\t' + str(self.id_nodo) + '[label="' + param.GREATERTHAN_t + '"]\n'
             self.ast += '-> "Param ' + str(id_param) + '" -> ' + str(self.id_nodo) + '\n'
 
+    def visit_lista_sentencias(self, lista_sentencias):
+
+        self.id_lista_sentencias += 1
+        id_lista_sentencias = self.id_lista_sentencias
+
+        if lista_sentencias.lista_sentencias1_p is not None:
+            if not isinstance(lista_sentencias.lista_sentencias1_p, list):
+                aux = [lista_sentencias.lista_sentencias1_p]
+            else:
+                aux = lista_sentencias.lista_sentencias1_p
+
+            for stmt in aux:
+                if stmt is not None:
+                    stmt.accept(self)
+
+        if lista_sentencias.sentencia_p is not None:
+            if not isinstance(lista_sentencias.sentencia_p, list):
+                aux = [lista_sentencias.sentencia_p]
+            else:
+                aux = lista_sentencias.sentencia_p
+
+            for stmt in aux:
+                if stmt is not None:
+                    self.ast += '-> "Lista_Sentencias ' + str(id_lista_sentencias) + '"'
+                    stmt.accept(self)
 
     def visit_sentencia_comp(self, sentencia_comp):
 
 
         self.id_sentencia_comp += 1
         id_sentencia_comp = self.id_sentencia_comp
-
+        self.id_lista_sentencias += 1
 
         self.ast += '-> "Sentencia_Comp ' + str(id_sentencia_comp) + '"\n'
 
@@ -143,6 +170,21 @@ class Visitor(object):
                 elif stmt is not None:
                     self.ast += '\t"Sentencia_Comp ' + str(id_sentencia_comp) + '"'
                     stmt.accept(self)
+
+        if sentencia_comp.lista_sentencias1_p is not None:
+            if isinstance(sentencia_comp.lista_sentencias1_p, list):
+                aux = sentencia_comp.lista_sentencias1_p
+            else:
+                aux = [sentencia_comp.lista_sentencias1_p]
+            for stmt in aux:
+                if isinstance(stmt, str):
+                    self.id_nodo += 1
+                    self.ast += '\t' + str(self.id_nodo) + '[label="' + stmt + '"]\n'
+                    self.ast += '\t"Sentencia_Comp ' + str(id_sentencia_comp) + '" ->' + str(self.id_nodo) + '\n'
+                elif stmt is not None:
+                    self.ast += '\t"Sentencia_Comp ' + str(id_sentencia_comp) + '"'
+                    stmt.accept(self)
+
 
     def visit_declaraciones_locales(self, declaraciones_locales):
         self.id_declaraciones_locales += 1
@@ -232,6 +274,10 @@ class Visitor(object):
         self.ast += '-> "Expresion ' + str(id_expresion) + '"\n'
         self.id_nodo += 1
         self.ast += '\t' + str(self.id_nodo) + '[label="' + str(expresion.var_p) + '"]\n'
+        self.ast += '-> "Expresion ' + str(id_expresion) + '" -> ' + str(self.id_nodo) + '"\n'
+
+        self.id_nodo += 1
+        self.ast += '\t' + str(self.id_nodo) + '[label="' + '=' + '"]\n'
         self.ast += '-> "Expresion ' + str(id_expresion) + '" -> ' + str(self.id_nodo) + '"\n'
 
         self.id_nodo += 1
@@ -431,7 +477,7 @@ class Visitor(object):
         if expresion_simple.relop_p == 'EQ':
             self.id_nodo += 1
             self.ast += ' -> "Expresion_simple ' + str(id_expresion_simple) + '" ->' + str(self.id_nodo) + '\n'
-            self.ast += '\t' + str(self.id_nodo) + '[label="' + str(expresion_simple.relop_p) + '"]\n'
+            self.ast += '\t' + str(self.id_nodo) + '[label= "EQ"' + '"]\n'
 
         else:
             self.id_nodo += 1
@@ -446,10 +492,11 @@ class Visitor(object):
         for stmt in aux:
             if isinstance(stmt, str):
                 self.id_nodo += 1
+                self.ast += ' -> "Expresion_simple ' + str(id_expresion_simple) + '" ->' + str(self.id_nodo) + '\n'
                 self.ast += '\t' + str(self.id_nodo) + '[label="' + stmt + '"]\n'
-                self.ast += '\t"Expresion_simple ' + str(id_expresion_simple) + '" ->' + str(self.id_nodo) + '\n'
             elif stmt is not None:
-                self.ast += '\t"Expresion_simple ' + str(id_expresion_simple) + '"'
+
+                self.ast += ' -> "Expresion_simple ' + str(id_expresion_simple) + '" ->' + str(self.id_nodo) + '\n'
                 stmt.accept(self)
 
     def visit_expresion_aditiva(self, expresion_aditiva):
@@ -459,7 +506,7 @@ class Visitor(object):
         self.id_nodo += 1
         self.ast += ' -> "Expresion_aditiva ' + str(id_expresion_aditiva) + '" ->' + str(self.id_nodo) + '"\n'
         self.ast += '\t' + str(self.id_nodo) + '[label="' + str(expresion_aditiva.expresion_aditiva_p) + '"]\n'
-        print(expresion_aditiva.expresion_aditiva_p)
+
 
         if expresion_aditiva.addop_p == '+':
             self.id_nodo += 1

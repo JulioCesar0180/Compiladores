@@ -1,0 +1,277 @@
+digraph G {
+	"Programa 1"  -> "Declaracion_var 1"
+	1[label="ENT"]
+	"Declaracion_var 1" -> 1
+	2[label="aNumber1"]
+	"Declaracion_var 1" -> 2
+	"Programa 1"  -> "Declaracion_var 2"
+	3[label="ENT"]
+	"Declaracion_var 2" -> 3
+	4[label="aNumber2"]
+	"Declaracion_var 2" -> 4
+	"Programa 1"  -> "Declaracion_var 3"
+	5[label="ENT"]
+	"Declaracion_var 3" -> 5
+	6[label="anArray"]
+	"Declaracion_var 3" -> 6
+	7[label="123"]
+	"Declaracion_var 3" -> 7
+	"Programa 1"  -> "Declaracion_var 4"
+	8[label="VACUO"]
+	"Declaracion_var 4" -> 8
+	9[label="aVariable"]
+	"Declaracion_var 4" -> 9
+	"Programa 1"  -> "Declaracion_var 5"
+	10[label="VACUO"]
+	"Declaracion_var 5" -> 10
+	11[label="anotherArray"]
+	"Declaracion_var 5" -> 11
+	12[label="234"]
+	"Declaracion_var 5" -> 12
+	"Programa 1" -> "Declaracion_fun 1"
+	13[label="VACUO"]
+	"Declaracion_fun 1" ->13
+	14[label="aProcedure1"]
+	"Declaracion_fun 1" ->14
+	15[label="VACUO"]
+	"Declaracion_fun 1" ->15
+	"Declaracion_fun 1"
+-> "Sentencia_Comp 1"
+	"Programa 1" -> "Declaracion_fun 2"
+	16[label="VACUO"]
+	"Declaracion_fun 2" ->16
+	17[label="aProcedure2"]
+	"Declaracion_fun 2" ->17
+	18[label="VACUO"]
+	"Declaracion_fun 2" ->18
+	"Declaracion_fun 2"
+-> "Sentencia_Comp 2"
+	"Programa 1" -> "Declaracion_fun 3"
+	19[label="ENT"]
+	"Declaracion_fun 3" ->19
+	20[label="aProcedure3"]
+	"Declaracion_fun 3" ->20
+	21[label="VACUO"]
+	"Declaracion_fun 3" ->21
+	"Declaracion_fun 3"
+-> "Sentencia_Comp 3"
+	"Programa 1" -> "Declaracion_fun 4"
+	22[label="ENT"]
+	"Declaracion_fun 4" ->22
+	23[label="aProcedure4"]
+	"Declaracion_fun 4" ->23
+	"Declaracion_fun 4"
+-> "Param 1"
+	24[label="ENT"]
+-> "Param 1" -> 24
+	25[label="a1"]
+-> "Param 1" -> 25
+	"Declaracion_fun 4"
+-> "Param 2"
+	26[label="VACUO"]
+-> "Param 2" -> 26
+	27[label="a2"]
+-> "Param 2" -> 27
+	"Declaracion_fun 4"
+-> "Param 3"
+	28[label="ENT"]
+-> "Param 3" -> 28
+	29[label="aa1"]
+-> "Param 3" -> 29
+	30[label="<"]
+-> "Param 3" -> 30
+	31[label=">"]
+-> "Param 3" -> 31
+	"Declaracion_fun 4"
+-> "Param 4"
+	32[label="VACUO"]
+-> "Param 4" -> 32
+	33[label="aa2"]
+-> "Param 4" -> 33
+	34[label="<"]
+-> "Param 4" -> 34
+	35[label=">"]
+-> "Param 4" -> 35
+	"Declaracion_fun 4"
+-> "Sentencia_Comp 4"
+	"Programa 1" -> "Declaracion_fun 5"
+	36[label="ENT"]
+	"Declaracion_fun 5" ->36
+	37[label="aProcedure4"]
+	"Declaracion_fun 5" ->37
+	"Declaracion_fun 5"
+-> "Param 5"
+	38[label="VACUO"]
+-> "Param 5" -> 38
+	39[label="aNum1"]
+-> "Param 5" -> 39
+	"Declaracion_fun 5"
+-> "Param 6"
+	40[label="VACUO"]
+-> "Param 6" -> 40
+	41[label="aNum2"]
+-> "Param 6" -> 41
+	"Declaracion_fun 5"
+-> "Param 7"
+	42[label="ENT"]
+-> "Param 7" -> 42
+	43[label="anArray1"]
+-> "Param 7" -> 43
+	44[label="<"]
+-> "Param 7" -> 44
+	45[label=">"]
+-> "Param 7" -> 45
+	"Declaracion_fun 5"
+-> "Param 8"
+	46[label="VACUO"]
+-> "Param 8" -> 46
+	47[label="anArray2"]
+-> "Param 8" -> 47
+	48[label="<"]
+-> "Param 8" -> 48
+	49[label=">"]
+-> "Param 8" -> 49
+	"Declaracion_fun 5"
+-> "Sentencia_Comp 5"
+	"Programa 1" -> "Declaracion_fun 6"
+	50[label="ENT"]
+	"Declaracion_fun 6" ->50
+	51[label="aProcedure4"]
+	"Declaracion_fun 6" ->51
+	"Declaracion_fun 6"
+-> "Param 9"
+	52[label="ENT"]
+-> "Param 9" -> 52
+	53[label="aNum1"]
+-> "Param 9" -> 53
+	"Declaracion_fun 6"
+-> "Param 10"
+	54[label="VACUO"]
+-> "Param 10" -> 54
+	55[label="aNum2"]
+-> "Param 10" -> 55
+	"Declaracion_fun 6"
+-> "Param 11"
+	56[label="ENT"]
+-> "Param 11" -> 56
+	57[label="anArray1"]
+-> "Param 11" -> 57
+	58[label="<"]
+-> "Param 11" -> 58
+	59[label=">"]
+-> "Param 11" -> 59
+	"Declaracion_fun 6"
+-> "Sentencia_Comp 6"
+	"Programa 1" -> "Declaracion_fun 7"
+	60[label="ENT"]
+	"Declaracion_fun 7" ->60
+	61[label="aProcedure4"]
+	"Declaracion_fun 7" ->61
+	"Declaracion_fun 7"
+-> "Param 12"
+	62[label="ENT"]
+-> "Param 12" -> 62
+	63[label="aNum1"]
+-> "Param 12" -> 63
+	"Declaracion_fun 7"
+-> "Param 13"
+	64[label="VACUO"]
+-> "Param 13" -> 64
+	65[label="aNum2"]
+-> "Param 13" -> 65
+	"Declaracion_fun 7"
+-> "Param 14"
+	66[label="ENT"]
+-> "Param 14" -> 66
+	67[label="anArray1"]
+-> "Param 14" -> 67
+	68[label="<"]
+-> "Param 14" -> 68
+	69[label=">"]
+-> "Param 14" -> 69
+	"Declaracion_fun 7"
+-> "Param 15"
+	70[label="VACUO"]
+-> "Param 15" -> 70
+	71[label="anArray2"]
+-> "Param 15" -> 71
+	72[label="<"]
+-> "Param 15" -> 72
+	73[label=">"]
+-> "Param 15" -> 73
+	"Declaracion_fun 7"
+-> "Param 16"
+	74[label="ENT"]
+-> "Param 16" -> 74
+	75[label="a1"]
+-> "Param 16" -> 75
+	"Declaracion_fun 7"
+-> "Sentencia_Comp 7"
+	"Sentencia_Comp 7" -> "Declaracion_var 6"
+	76[label="ENT"]
+	"Declaracion_var 6" -> 76
+	77[label="aNum3"]
+	"Declaracion_var 6" -> 77
+	"Sentencia_Comp 7" -> "Declaracion_var 7"
+	78[label="ENT"]
+	"Declaracion_var 7" -> 78
+	79[label="anArray3"]
+	"Declaracion_var 7" -> 79
+	80[label="456"]
+	"Declaracion_var 7" -> 80
+	"Sentencia_Comp 7" -> "Declaracion_var 8"
+	81[label="VACUO"]
+	"Declaracion_var 8" -> 81
+	82[label="aNum4"]
+	"Declaracion_var 8" -> 82
+	"Sentencia_Comp 7" -> "Declaracion_var 9"
+	83[label="VACUO"]
+	"Declaracion_var 9" -> 83
+	84[label="anArray4"]
+	"Declaracion_var 9" -> 84
+	85[label="78"]
+	"Declaracion_var 9" -> 85
+	"Sentencia_Comp 7" -> "Declaracion_var 10"
+	86[label="ENT"]
+	"Declaracion_var 10" -> 86
+	87[label="aNum5"]
+	"Declaracion_var 10" -> 87
+	"Sentencia_Comp 7"-> "Expresion 1"
+	88[label="aNum3"]
+-> "Expresion 1" -> 88"
+	89[label="="]
+-> "Expresion 1" -> 89"
+	90[label="aNum1"]
+-> "Expresion 1" -> 90"
+	"Sentencia_Comp 7"-> "Expresion 2"
+	91[label="aNum2"]
+-> "Expresion 2" -> 91"
+	92[label="="]
+-> "Expresion 2" -> 92"
+ -> "Expresion_aditiva 1" ->94"
+	94[label="aNum3"]
+ -> "Expresion_aditiva 1" ->95"
+	95[label="+"]
+	96[label="01"]
+	"Expresion_aditiva 1" ->96
+	"Sentencia_Comp 7"-> "Expresion 3"
+	97[label="<nodos.Var object at 0x00000277178A6F98>"]
+-> "Expresion 3" -> 97"
+	98[label="="]
+-> "Expresion 3" -> 98"
+ -> "Var 1"
+	100[label="anArray1"]
+-> "Var 1" -> 100"
+	101[label="02"]
+-> "Var 1" -> 101"
+	"Sentencia_Comp 7"-> "Expresion 4"
+	102[label="<nodos.Var object at 0x00000277178A6C50>"]
+-> "Expresion 4" -> 102"
+	103[label="="]
+-> "Expresion 4" -> 103"
+ -> "Var 2"
+	105[label="anarray3"]
+-> "Var 2" -> 105"
+	106[label="04"]
+-> "Var 2" -> 106"
+}

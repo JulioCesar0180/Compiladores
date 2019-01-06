@@ -236,18 +236,32 @@ digraph G {
 	"Declaracion_var 10" -> 86
 	87[label="aNum5"]
 	"Declaracion_var 10" -> 87
-	"Programa 1" -> "Declaracion_fun 8"
-	88[label="VACUO"]
-	"Declaracion_fun 8" ->88
-	89[label="main"]
-	"Declaracion_fun 8" ->89
-	90[label="VACUO"]
-	"Declaracion_fun 8" ->90
-	"Declaracion_fun 8"
--> "Sentencia_Comp 8"
-	"Sentencia_Comp 8" -> "Declaracion_var 11"
-	91[label="ENT"]
-	"Declaracion_var 11" -> 91
-	92[label="aNumber1"]
-	"Declaracion_var 11" -> 92
+	"Sentencia_Comp 7"-> "Expresion 1"
+	88[label="aNum3"]
+-> "Expresion 1" -> 88"
+	89[label="="]
+-> "Expresion 1" -> 89"
+	90[label="aNum1"]
+-> "Expresion 1" -> 90"
+	"Sentencia_Comp 7"-> "Expresion 2"
+	91[label="aNum2"]
+-> "Expresion 2" -> 91"
+	92[label="="]
+-> "Expresion 2" -> 92"
+	93[label="<nodos.ExpresionAditiva object at 0x00000277178A6CC0>"]
+-> "Expresion 2" -> 93"
+	"Sentencia_Comp 7"-> "Expresion 3"
+	94[label="<nodos.Var object at 0x00000277178A6F98>"]
+-> "Expresion 3" -> 94"
+	95[label="="]
+-> "Expresion 3" -> 95"
+	96[label="<nodos.Var object at 0x00000277178A6F60>"]
+-> "Expresion 3" -> 96"
+	"Sentencia_Comp 7"-> "Expresion 4"
+	97[label="<nodos.Var object at 0x00000277178A6C50>"]
+-> "Expresion 4" -> 97"
+	98[label="="]
+-> "Expresion 4" -> 98"
+	99[label="<nodos.Var object at 0x0000027717679358>"]
+-> "Expresion 4" -> 99"
 }

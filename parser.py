@@ -8,6 +8,7 @@ import nodos
 from dibujar_AST_visitor import Visitor
 from tabla_simbolos import *
 from tabla_simbolos_visitor import *
+from chequeo_tipos_visitor import VisitorTipos
 
 #Código utilizado para resolver los problemas de Shift/Reduce
 
@@ -359,6 +360,7 @@ parser = yacc.yacc()
 
 
 out = open('out1.dot', 'w')
+out2 = open('out2.dot', 'w')
 with open('sample.txt', 'r') as arch:
     contents = arch.read()
     result = parser.parse(contents)
@@ -371,5 +373,10 @@ with open('sample.txt', 'r') as arch:
         build_tabla_simbolos = BuildTablaSimbolosVisitor()
         nodos.Programa.accept2(result, build_tabla_simbolos)
 
+        chequeo_tipos = VisitorTipos()
+        nodos.Programa.accept(result, chequeo_tipos)
+        out2.write(chequeo_tipos.ast)
+
     else:
         out.write('Error al realizar el parse.')
+        out2.write('Error al realizar el parse.')

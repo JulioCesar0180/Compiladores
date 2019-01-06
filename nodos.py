@@ -52,8 +52,6 @@ class DeclaracionFun(Nodo):
         self.sentencia_comp_p = sentencia_comp_p
         self.tabla_simbolos = None
 
-
-
     def accept(self, visitor):
         visitor.visit_declaracion_fun(self)
 
